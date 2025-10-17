@@ -1,1 +1,33 @@
+public class SmallCar extends Car {
 
+private String cabType;
+private boolean hybrid;
+
+//parameterized constructor
+public SmallCar(String cm , int cID , double p , String cabType , boolean hybrid){
+super(cm , cID , p) ;
+this.cabType = cabType;
+this.hybrid = hybrid;
+}
+
+public double calculatePrice(){
+double total = 0;
+
+if(cabType..equalsIgnoreCase("Double Cab") //if it is double cab add 50 to the total 
+total = price + 50;
+else
+total = price;
+
+if( hybrid == true ) //if it is hybrid add 50 to the total
+total = total + 50;
+
+return total;
+}
+
+
+public String toString(){
+return super.toString() + "\n| Cab Type: " + cabType + "| Hybrid? " + hybrid;
+}
+
+
+}
