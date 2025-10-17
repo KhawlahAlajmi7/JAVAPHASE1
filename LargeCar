@@ -1,1 +1,29 @@
 
+public class LargeCar extends Car {
+
+private String type;  //Luxury or Economy
+
+
+//parameterized constructor
+public LargeCar(String cm , int cID , double p , String type){
+super(cm , cID , p) ;
+this.type = type ;
+}
+
+public double calculatePrice(){
+double total = 0;
+
+if(type.equalsIgnoreCase("Luxury") //if luxury add 500 to the price
+total = price + 500 ;
+else 
+total = price; //if economy
+
+return total;
+}
+
+public String toString(){
+return super.toString() + "\n| Type Of The Large Car: " + type;
+}
+
+
+}
