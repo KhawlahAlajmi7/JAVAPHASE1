@@ -1,1 +1,35 @@
+public class SportCar extends SmallCar {
 
+private int maxSpeed;
+
+//parameterized constructor
+public SportCar(String cm , int cID , double p , String cabType , boolean hybrid , int maxSpeed){
+super(cm , cID , p , cabType , hybrid) ;
+this.maxSpeed = maxSpeed ;
+}
+
+public double calculatePrice(){
+double total = super.calculatePrice();
+
+//testing the max speed 
+if(maxSpeed == 270)
+ total = total + 100;
+else 
+ if(maxSpeed == 275)
+ total = total + 150;
+else
+ if(maxSpeed == 280)
+ total = total + 200;
+
+return total;
+}
+
+public String toString(){
+return super.toString() + "\n| The Max Speed For The Car: " + maxSpeed;
+}
+
+public int getMaxSpeed(){
+return maxSpeed;
+}
+
+}
