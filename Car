@@ -1,13 +1,61 @@
-public class Car {
+public abstract class Car{
+
+   private String carModel;
+   private int carID;
+   private boolean available;
+   protected double price;
+
+
+//parameterized constructor
+   public Car(String carModel , int carID , double price) { 
+      this.carModel = carModel;
+      this.carID = carID;
+      this.price = price;
+      available = true;
+   }
+
+   public abstract double calculatePrice(); //abstract method
+
+
+//setters and getters
+   public void setCarModel(String cm) {
+      carModel = cm;
+   }
+
+   public void setCarID(int cID) {
+      carID = cID;
+   }
+
+
+   public void setPrice(double p) {
+      price = p;
+   }
+
+   public void setAvailable(boolean a) {
+      available = a;
+   }
+
+   public String getCarModel(){
+      return carModel;
+   }
+
+   public int getCarID(){
+      return carID;
+   }
+
+   public boolean getAvailable(){
+      return available;
+   }
+
+   public double getPrice(){
+      return price;
+   }
 
 
 
-
-
-
-
-
-
-
+//toString method
+   public String toString() { 
+      return "Car Model: " + carModel + "| Car ID: " + carID + "| Availability: " + available ;
+   }
 
 }
