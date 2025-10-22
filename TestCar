@@ -29,8 +29,8 @@ CarRentalCompany.addCar(s1);
 CarRentalCompany.addCar(s2);
 CarRentalCompany.addCar(s3);
 
-CarRentalCompany.addCar(I1);
-CarRentalCompany.addCar(I2);
+CarRentalCompany.addCar(l1);
+CarRentalCompany.addCar(l2);
 
 CarRentalCompany.addCar(sp1);
 CarRentalCompany.addCar(sp2);
