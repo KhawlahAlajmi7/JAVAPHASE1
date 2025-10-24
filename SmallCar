@@ -13,7 +13,7 @@ this.hybrid = hybrid;
 public double calculatePrice(){
 double total = 0;
 
-if(cabType..equalsIgnoreCase("Double Cab") //if it is double cab add 50 to the total 
+if(cabType.equalsIgnoreCase("Double Cab")) //if it is double cab add 50 to the total 
 total = price + 50;
 else
 total = price;
@@ -26,7 +26,7 @@ return total;
 
 
 public String toString(){
-return super.toString() + "\n| Cab Type: " + cabType + "| Hybrid? " + hybrid;
+return super.toString() + "\n| Cab Type: " + cabType + "\n| Hybrid? " + hybrid;
 }
 
 
