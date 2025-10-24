@@ -1,40 +1,46 @@
-package مشروع1;
 import java.util.Scanner;
 public class TestCar {
-static Scanner input=new Scanner(System.in);
+
 static CarRentalCompany carRentalCompany=new CarRentalCompany("rd CarRentalCompany",1000);
-	public static void main(String[] args) {
-	
+
+static Scanner input = new Scanner(System.in) ;
+
+public static void main(String args[]) {
+
+
+Scanner input = new Scanner(System.in) ;
+
+
 		
 		
 		//- Small car objects: 
 
-SmallCar s1 = new SmallCar(“Lexus UX250h” , 101 , 400 , “Double Cab”, true) ;
-SmallCar s2 = new SmallCar(“Lexus UX200” , 102 , 350 , “Double Cab” , false) ;
-SmallCar s3 = new SmallCar(“Lexus IS Coupe” , 103 , 300 , “Single Cab” , false) ;
+SmallCar s1 = new SmallCar("Lexus UX250h" , 101 , 400 , "Double Cab", true) ;
+SmallCar s2 = new SmallCar("Lexus UX200" , 102 , 350 , "Double Cab" , false) ;
+SmallCar s3 = new SmallCar("Lexus IS Coupe" , 103 , 300 , "Single Cab" , false) ;
 
 			//- Large car objects:
 
-LargeCar l1 = new LargeCar(“Lexus RX350” , 201 , 800 , “Economy”) ;
-LargeCar l2 = new LargeCar(“Lexus LX600” , 202 , 2000 , “Luxury”) ;
+LargeCar l1 = new LargeCar("Lexus RX350" , 201 , 800 , "Economy") ;
+LargeCar l2 = new LargeCar("Lexus LX600" , 202 , 2000 , "Luxury") ;
 
 			//- Sport car objects:
 
-SportCar sp1 = new SportCar(“Lexus LC500h” , 301 , 1700, “Single Cab” , true , 270) ;
-SportCar sp2 = new SportCar(“Lexus RC F” , 302 , 1400 , “Double Cab” , false , 280) ;
-SportCar sp3 = new SportCar(“Lexus LC500” , 303 , 1500 , “Single Cab” , false , 275) ;
+SportCar sp1 = new SportCar("Lexus LC500h" , 301 , 1700, "Single Cab" , true , 270) ;
+SportCar sp2 = new SportCar("Lexus RC F" , 302 , 1400 , "Double Cab" , false , 280) ;
+SportCar sp3 = new SportCar("Lexus LC500" , 303 , 1500 , "Single Cab" , false , 275) ;
 		
 	//adding
-CarRentalCompany.addCar(s1);
-CarRentalCompany.addCar(s2);
-CarRentalCompany.addCar(s3);
+carRentalCompany.addCar(s1);
+carRentalCompany.addCar(s2);
+carRentalCompany.addCar(s3);
 
-CarRentalCompany.addCar(l1);
-CarRentalCompany.addCar(l2);
+carRentalCompany.addCar(l1);
+carRentalCompany.addCar(l2);
 
-CarRentalCompany.addCar(sp1);
-CarRentalCompany.addCar(sp2);
-CarRentalCompany.addCar(sp3);
+carRentalCompany.addCar(sp1);
+carRentalCompany.addCar(sp2);
+carRentalCompany.addCar(sp3);
 		
 
 //-------------------------
@@ -44,10 +50,11 @@ do {
 	
 System.out.println("----- Menu -----");
 System.out.println("1- add new reservation");
-System.out.println("2- view Car");
+System.out.println("2- view Cars");
 System.out.println("3- cancel reservation or return car");
-System.out.println("4-  search about reservation");
-System.out.println("5- exit");
+System.out.println("4- search about reservation");
+System.out.println("5- Delete Car");
+System.out.println("6- exit");
 choice=input.nextInt();
 switch(choice) {
 case 1:
@@ -67,24 +74,38 @@ searchReservation();
 break;
 
 case 5:
+System.out.println("Enter Car ID :");
+int no = input.nextInt();
+if (carRentalCompany.deleteCar(no) ) {
+System.out.println("Delete is Done");
+}
+else 
+System.out.println("Can not Delete");
+break; 
+
+
+case 6:
 	System.out.println(" **** good by ****");
 break;
+
 default:
-	System.out.println(" invalid input");
+	System.out.println("invalid input");
 
 }//end switch
 } while (choice!=5);//do
 
+}//main
+
 
 public static void addNewReservation() {
-	System.out.println(" Enter car No:");
+	System.out.println("Enter car ID:");
 	int no = input.nextInt();
-	Car carobj=CarRentalCompany.searchCar(no);
+	Car carobj=carRentalCompany.searchCar(no);
 	if(carobj == null ||carobj.isAvailable()==false) {
-		System.out.println("  this car is not available, try again");
+		System.out.println("this car is not available, try again");
 return;
 }//if
-System.out.println("Enter customer full name: ");
+System.out.println("Enter Customer Full Name: ");
 input.nextLine();
 String name=input.nextLine();
 
@@ -94,12 +115,12 @@ String mob=input.next();
 System.out.println("Enter customer id: ");
 String id=input.next();
 
-Reservation res=new Reservation(name,mob,id);
+Reservation res = new Reservation(name,mob,id);
 
 System.out.println("Enter the number of days that ypu want to make reservation: ");
 int days=input.nextInt();
 res.pickUpCar(carobj,days);
-CarRentalCompany.addCar(res);
+carRentalCompany.addReservation(res);
 
 System.out.println("reservation addded sucssfully  ");
 System.out.println("------------------  ");
@@ -108,48 +129,48 @@ System.out.println("------------------  ");
 
 }//addnr
 public static void viewCars() {
-	System.out.println(" enter your choice :  ");
-	System.out.println("1-view LargeCar ");
-	System.out.println("2-view SmallCar ");
-	System.out.println("3-view SportCar ");
-	System.out.println("4-view all available Cars ");
-	System.out.println("5-return to the main menu ");
+	System.out.println("Enter your choice :  ");
+	System.out.println("1- view LargeCar ");
+	System.out.println("2- view SmallCar ");
+	System.out.println("3- view SportCar ");
+	System.out.println("4- view all available Cars ");
+	System.out.println("5- return to the main menu ");
 int ch=input.nextInt();
 switch(ch) {
 case 1:
-LargeCar[]list=CarRentalCompany.getLargeCar();
+LargeCar[]list=carRentalCompany.getLargeCar();
 System.out.println("--------------------------------");
-for( int i=0;i<list.length:i++)
+for( int i=0;i<list.length;i++)
 if(list[i]!=null) {
 System.out.println(list[i].toString());
 System.out.println("--------------------------------");
 }//if
 break;
 case 2:
-SmallCar[]list2=CarRentalCompany.getSmallCar();
-for( int i=0;i<list2.length:i++)
-if(list2[i]!=null&& !(list2[i] intanceof SportCar)) {
+SmallCar[] list2=carRentalCompany.getAllSmallCar();
+for( int i=0;i<list2.length;i++)
+if(list2[i]!=null&& !(list2[i] instanceof SportCar) ) {
 System.out.println(list2[i].toString());
 System.out.println("--------------------------------");
 }//if 2
 break;
 
 case 3:
-System.out.println(" enter the number of extra cars that you want: ");
+System.out.println("Enter the number of Maximum Speed that you want: ");
 int num=input.nextInt();
-SmallCar[]list3=CarRentalCompany.getAllCar(num);
-for( int i=0;i<list3.length:i++)
+SmallCar[] list3= carRentalCompany.getAllSmallCar(num);
+for( int i=0;i<list3.length;i++)
 if(list3[i]!=null) {
 System.out.println(list3[i].toString());
 System.out.println("--------------------------------");
 }//if
 break;
 case 4:
-Car[] list4 =CarRentalCompany.getAllAvailable();
+Car[] list4 =carRentalCompany.getAllAvailable();
 System.out.println("--------------------------------");
-for( int i=0;i<list4.length:i++)
+for( int i=0;i<list4.length;i++)
 if(list4[i]!=null) {
-System.out.println(list4[i].getClass().getsimpleName());
+System.out.println(list4[i].getClass().getSimpleName());
 System.out.println(list4[i].toString());
 System.out.println("--------------------------------");
 }//if
@@ -163,10 +184,10 @@ System.out.println("invalid input");
 }//vr
 
 public static void cancelReservation() {
-	System.out.println(" enter your choice :  ");
-	System.out.println("1-cancel Reservation");
+	System.out.println("Enter your choice :  ");
+	System.out.println("1- cancel Reservation");
 	System.out.println("2- Return car ");
-	System.out.println("3-return to the main menu ");
+	System.out.println("3- return to the main menu ");
 int ch=input.nextInt();
 switch(ch) {
 case 1: 
@@ -174,19 +195,19 @@ case 1:
 	String id=input.next();
 	System.out.println("Enter Car No : ");
 	int no =input.nextInt();
-	if(CarRentalCompany.cancelReservation(id,no))
-		System.out.println(" cancel done " );
+	if(carRentalCompany.cancelReservation(id,no))
+		System.out.println("cancel done" );
 	else
-		System.out.println(" sorry can't cancel " );
+		System.out.println("sorry can't cancel" );
 break;
 case 2:
 System.out.println("Enter customer id: ");
 id=input.next();
 System.out.println("Enter Car No : ");
  no =input.nextInt();
-Reservation res=CarRentalCompany.searchReservation(id,no);
+Reservation res=carRentalCompany.searchReservation(id,no);
 if(res==null)
-System.out.println("  can't found this reservation " );
+System.out.println("can't found this reservation " );
 else
 res.returnCar();
 break;
@@ -200,19 +221,20 @@ System.out.println("invalid input");
 
 
 
-public ststic void searchReservation() {
+public static void searchReservation() {
 System.out.println("Enter customer id: ");
 String id=input.next();
 System.out.println("Enter Car No : ");
-int no =input.nextInt();
-Reservation res=CarRentalCompany.searchReservation(id,no);
+int no = input.nextInt();
+Reservation res = carRentalCompany.searchReservation(id,no);
 if(res==null)
-System.out.println("  can't found this reservation " );
+System.out.println("can't found this reservation " );
 else
 System.out.println(res.toString() );
 System.out.println("--------------------" );
 
 }//sr
 }//class
-}//main
 
+
+ 
