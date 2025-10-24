@@ -1,1 +1,119 @@
+package TestCar;
 
+public class CarRentalCompany{
+private String CompanyName;
+Car[] carList;
+Reservation[] reservations;
+int numCars , numRes;
+
+public CarRentalCompany( String name , int maxRes ){
+CompanyName = name;
+carList = new Car[100];
+numCars = 0;
+reservations = new Reservation[maxRes];
+numRes = 0;
+}
+
+public boolean addCar( Car c ){
+if( numCars < carList.length ){
+carList[numCars] = car;
+numCars++;
+return true;
+}
+return false;
+}
+
+public boolean deleteCar( int carID ){
+for( int i = 0 ; i < numCars ; i++)
+if( carList[i].getCarID() == carID){
+if(carList[i].isAvailable() == true ){
+for( int j = i ; j < numCars-1 ; j++)
+carList[j] = carList[j+1];
+numCars--;
+carList[numCars] = null;
+return true;
+}
+else
+System.out.println("This car is reserved to another person");
+}
+return false;
+}
+
+public boolean addReservation( Reservation r ){
+if( numRes < reservations.length ){
+reservations[numRes] = new Reservation(res);
+numRes++;
+return true;
+}
+else
+return false;
+}
+
+public boolean cancelReservation( String id , int carID ){
+for(int i = 0 ; i < numRes ; i++){
+if( reservations[i].getID().equals(id) && reservations[i].getCar().getCarID() == carID )
+{
+reservations[i].returnCar();
+reservations[i] = reservations[numRes-1];
+numRes--;
+reservations[numRes] = null;
+return true;
+}
+}
+return false;
+}
+
+public Reservation searchReservation( String id , int carID ){
+for( int i = 0 ; i < numRes ; i++)
+if( reservations[i].getCar().getCarID() == carID)
+return reservations[i];
+return null;
+}
+
+public Car searchCar( int carID ){
+for( int i = 0 ; i < numCars ; i++ )
+if( carList[i].getCarID() == carID )
+return carsList[i];
+return null;
+}
+
+public LargeCar[] getLargeCar(){
+LargeCar[] list = new LargeCar[numCars];
+int j = 0;
+for( int i = 0 ; i < numCars ; i++)
+if( carList[i] instanceof LargeCar )
+list[j++] = (LargeCar) carList[i];
+return list;
+}
+
+public SmallCar[] getSmallCar(){
+SmallCar[] list = new SmallCar[numCars];
+int j = 0;
+for( int i = 0 ; i < numCars ; i++)
+if( carList[i] instanceof SmallCar )
+list[j++] = (SmallCar) carList[i];
+return list;
+}
+
+public SportCar[] getSmallCar(int m){
+SportCar[] list = new SportCar[numCars];
+int j = 0;
+for( int i = 0  ; i < numCars ; i++ )
+if( carList[i] instanceof SportCar && ((SportCar) carList[i]).getM() >= m)
+list[j++] = (SportCar) carList[i];
+return list;
+}
+
+public Car[] getAllAvailable(){
+Car[] list = new Car[numCars];
+int j = 0;
+for( int i = 0 ; i < numCars ; i++ )
+if( carList[i].isAvailable() )
+list[j++] = carList[i];
+return list;
+}
+
+public String toString(){
+return "Companyname: " + CompanyName + ",numCars: " + numCars + "\n numRes: " + numRes ;
+}
+}
