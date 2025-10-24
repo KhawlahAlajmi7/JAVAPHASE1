@@ -1,4 +1,3 @@
-
 public class LargeCar extends Car {
 
 private String type;  //Luxury or Economy
@@ -13,7 +12,7 @@ this.type = type ;
 public double calculatePrice(){
 double total = 0;
 
-if(type.equalsIgnoreCase("Luxury") //if luxury add 500 to the price
+if(type.equalsIgnoreCase("Luxury"))  //if luxury add 500 to the price
 total = price + 500 ;
 else 
 total = price; //if economy
