@@ -43,7 +43,7 @@ public abstract class Car{
       return carID;
    }
 
-   public boolean getAvailable(){
+   public boolean isAvailable(){
       return available;
    }
 
@@ -55,7 +55,7 @@ public abstract class Car{
 
 //toString method
    public String toString() { 
-      return "Car Model: " + carModel + "| Car ID: " + carID + "| Availability: " + available ;
+      return "| Car Model: " + carModel + "\n| Car ID: " + carID + "\n| Availability: " + available ;
    }
 
 }
