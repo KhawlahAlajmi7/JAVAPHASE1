@@ -1,1 +1,76 @@
+public class Reservation{
+private String Name;
+private String Mobile;
+private String ID;
+private Car car;
+private int NumDays;
+private double TotalPrice;
 
+public Reservation( String Name, String Mobile, String ID ){
+this.Name = Name;
+this.Mobile = Mobile;
+this.ID = ID;
+}
+
+public Reservation( Reservation r ){
+this.Name = r.Name;
+this.Mobile = r.Mobile;
+this.ID = r.ID;
+this.NumDays = r.NumDays;
+this.car = r.car;
+this.TotalPrice = r.TotalPrice;
+}
+
+public void pickUpCar( Car car, int days ){
+NumDays = days;
+this.car = car;
+car.setAvailabe(false);
+TotalPrice = NumDays*this.car.calculatePrice();
+}
+
+public void returnCar(){
+if(car.isAvailable() == true)
+System.out.println("This car is already returned");
+else{
+car.setAvailable(true);
+System.out.println("car is returned successfully");
+}
+}
+
+public String toString(){
+return "Name: " + Name + ",Mobile: " + Mobile + "\n ID: " + ID +
+"\n car: " + car + "\n NumDays= " + NumDays + "\n TotalPrice= " + TotalPrice;
+}
+
+public String getName(){
+return Name;
+}
+
+public void setName( String Name ){
+this.Name = Name;
+}
+
+public String getMobile(){
+return Mobile;
+}
+
+public void setMobile( String Mobile ){
+this.Mobile = Mobile;
+}
+
+public String getID(){
+return ID;
+}
+
+public void setID( String ID ){
+this.ID = ID;
+}
+
+public Car getCar(){
+return car;
+}
+
+public void setCar( Car car ){
+this.car = car;
+}
+}
