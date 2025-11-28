@@ -4,12 +4,11 @@ public class TestCar {
 
 static CarRentalCompany carRentalCompany = new CarRentalCompany("Lexus Company",100);
 
-static Scanner input = new Scanner(System.in) ;
 
 public static void main(String args[]) {
 
 
-Scanner input = new Scanner(System.in) ;
+
 
 
 		
