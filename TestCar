@@ -1,7 +1,8 @@
-import java.util.Scanner;
+import java.io.File;
+
 public class TestCar {
 
-static CarRentalCompany carRentalCompany=new CarRentalCompany("rd CarRentalCompany",1000);
+static CarRentalCompany carRentalCompany = new CarRentalCompany("Lexus Company",100);
 
 static Scanner input = new Scanner(System.in) ;
 
@@ -92,7 +93,7 @@ default:
 	System.out.println("invalid input");
 
 }//end switch
-} while (choice!=5);//do
+} while (choice!=6);//do
 
 }//main
 
