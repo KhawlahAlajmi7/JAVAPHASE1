@@ -1,28 +1,79 @@
-public class LargeCar extends Car {
+public class Reservation {
 
-private String type;  //Luxury or Economy
+private String Name;
+private String Mobile;
+private String ID;
+private Car car;
+private int NumDays;
+private double TotalPrice;
 
-
-//parameterized constructor
-public LargeCar(String cm , int cID , double p , String type){
-super(cm , cID , p) ;
-this.type = type ;
+public Reservation( String Name, String Mobile, String ID ){
+this.Name = Name;
+this.Mobile = Mobile;
+this.ID = ID;
 }
 
-public double calculatePrice(){
-double total = 0;
+public Reservation( Reservation r ){
+this.Name = r.Name;
+this.Mobile = r.Mobile;
+this.ID = r.ID;
+this.NumDays = r.NumDays;
+this.car = r.car;
+this.TotalPrice = r.TotalPrice;
+}
 
-if(type.equalsIgnoreCase("Luxury"))  //if luxury add 500 to the price
-total = price + 500 ;
-else 
-total = price; //if economy
+public void pickUpCar( Car car, int days ){
+NumDays = days;
+this.car = car;
+car.setAvailable(false);
+TotalPrice = NumDays*this.car.calculatePrice();
+}
 
-return total;
+public void returnCar(){
+if(car.isAvailable() == true)
+System.out.println("This car is already returned");
+else{
+car.setAvailable(true);
+System.out.println("car is returned successfully");
+}
 }
 
 public String toString(){
-return super.toString() + "\n| Type Of The Large Car: " + type;
+return "| Name: " + Name + "\n| Mobile: " + Mobile + "\n| ID: " + ID +
+"\n| car: " + car + "\n| NumDays= " + NumDays + "\n| TotalPrice= " + TotalPrice;
+}
+
+public String getName(){
+return Name;
+}
+
+public void setName( String Name ){
+this.Name = Name;
+}
+
+public String getMobile(){
+return Mobile;
+}
+
+public void setMobile( String Mobile ){
+this.Mobile = Mobile;
+}
+
+public String getID(){
+return ID;
+}
+
+public void setID( String ID ){
+this.ID = ID;
+}
+
+public Car getCar(){
+return car;
+}
+
+public void setCar( Car car ){
+this.car = car;
+}
 }
 
 
-}
