@@ -1,3 +1,6 @@
+import java.io.Serializable;
+import javax.swing.JOptionPane;
+
 public class Reservation {
 
 private String Name;
