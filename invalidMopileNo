@@ -1,0 +1,8 @@
+public class invalidMopileNo extends Exception {
+
+public invalidMopileNo(String s) {
+super(s);
+}
+
+
+}
