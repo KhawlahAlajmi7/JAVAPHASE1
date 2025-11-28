@@ -1,4 +1,6 @@
-public abstract class Car{
+import java.io.Serializable;
+
+public abstract class Car implements Seriaizable {
 
    private String carModel;
    private int carID;
