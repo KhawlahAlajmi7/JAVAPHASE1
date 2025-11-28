@@ -1,50 +1,82 @@
-public class CarRentalCompany {
+import java.io.*;
+import javax.swing.JOptionPane;
+
+public class CarRentalCompany implements InputOutputInterface {
 
 private String CompanyName;
-Car[] carList;
+Node headCar;
 Reservation[] reservations;
-int numCars , numRes;
+int maxCars = 100;
+int numRes;
 
 public CarRentalCompany( String name , int maxRes ){
 CompanyName = name;
-carList = new Car[100];
-numCars = 0;
+headCar = null;
 reservations = new Reservation[maxRes];
 numRes = 0;
 }
 
+public int CountCars(){
+if(headCar == null) 
+return 0;
+
+int count = 0;
+Node current = headCar;
+
+while( current != null ) {
+count++;
+current = current.getNext();
+}
+return count;
+}
+
 public boolean addCar( Car c ){
-if( numCars < carList.length ){
-carList[numCars] = c ;
-numCars++;
+if( CountCars() < maxCars ){
+Node n = new Node(c);
+n.setNext(headCar);
+headCar = n;
 return true;
 }
 return false;
 }
 
 public boolean deleteCar( int carID ){
-for( int i = 0 ; i < numCars ; i++)
-if( carList[i].getCarID() == carID){
-if(carList[i].isAvailable() == true ){
-for( int j = i ; j < numCars-1 ; j++)
-carList[j] = carList[j+1];
-numCars--;
-carList[numCars] = null;
-return true;
-}
-else
-System.out.println("This car is reserved to another person");
-}
+if( headCar == null)
+return false;
+if(headCar.getData().getCarID() == carID) {
+Car temp = headCar.getData();
+if(temp.isAvailable() == false){
+JOptionPane.showMessageDialog(null,"This Car is already reserved by another person");
 return false;
 }
+headCar = headCar.getNext();
+return true;
+}
 
-public boolean addReservation( Reservation r ){
-if( numRes < reservations.length ){
-reservations[numRes] = new Reservation(r);
+Node priv = headCar;
+Node current = headCar.getNext();
+while( current != null ) {
+if ( current.getData()..getCarID() == carID) {
+if (current.getData().isAvailable() == true) {
+priv.setNext(current.getNext());
+return true;
+}
+else {
+priv = priv.getNext();
+current = current.getNext();
+}
+}
+return false;
+
+}
+
+public boolean addReservation(Reservation res) {
+if ( numRes < reservations.length){
+reservations[numRes] = new Reservations(res);
 numRes++;
 return true;
 }
-else
+else 
 return false;
 }
 
@@ -64,55 +96,120 @@ return false;
 
 public Reservation searchReservation( String id , int carID ){
 for( int i = 0 ; i < numRes ; i++)
-if( reservations[i].getCar().getCarID() == carID)
+if( reservations[i].getID().equals(id) && reservations[i].getCar().getCarID() == carID)
 return reservations[i];
 
 return null;
 }
 
 public Car searchCar( int carID ){
-for( int i = 0 ; i < numCars ; i++ )
-if( carList[i].getCarID() == carID )
-return carList[i];
-
-
+if(headCar == null) //if list is empty
 return null;
+
+Node current = headCar;
+while( current != null) {
+if( current.getData().getCarID() == carID )
+return current.getData();
+current = current.getNext();
+}
+return null; //if not found
 }
 
 public LargeCar[] getLargeCar(){
-LargeCar[] list = new LargeCar[numCars];
+LargeCar[] list = new LargeCar[CountCars()];
 int j = 0;
-for( int i = 0 ; i < numCars ; i++)
-if( carList[i] instanceof LargeCar )
-list[j++] = (LargeCar) carList[i];
+
+Node current = headCar;
+while(current != null) {
+if( current.getData() instanceof LargeCar )
+list[j++] = (LargeCar) current.getData() ;
+current = current.getNext();
+}
 return list;
 }
 
 public SmallCar[] getAllSmallCar(){
-SmallCar[] list = new SmallCar[numCars];
+SmallCar[] list = new SmallCar[CountCars()];
 int j = 0;
-for( int i = 0 ; i < numCars ; i++)
-if( carList[i] instanceof SmallCar )
-list[j++] = (SmallCar) carList[i];
+
+Node current = headCar;
+while(current != null) {
+if( current.getData() instanceof SmallCar )
+list[j++] = (SmallCar) current.getData() ;
+current = current.getNext();
+}
 return list;
 }
 
 public SportCar[] getAllSmallCar(int m){
-SportCar[] list = new SportCar[numCars];
+SportCar[] list = new SportCar[CountCars()];
 int j = 0;
-for( int i = 0  ; i < numCars ; i++ )
-if( carList[i] instanceof SportCar && ((SportCar) carList[i]).getMaxSpeed() >= m)
-list[j++] = (SportCar) carList[i];
+Node current =  headCar ;
+while(current != null){
+if( current.getData() instanceof SportCar && ((SportCar) current.getData()).getMaxSpeed() <= m)
+list[j++] = (SportCar) current.getData();
+current = current.getNext();
+}
 return list;
 }
 
 public Car[] getAllAvailable(){
-Car[] list = new Car[numCars];
+Car[] list = new Car[CountCars()];
 int j = 0;
-for( int i = 0 ; i < numCars ; i++ )
-if( carList[i].isAvailable() )
-list[j++] = carList[i];
+
+Node current = headCar;
+while(current != null) {
+if( current.getData().isAvailable() )
+list[j++] = current.getData();
+current = current.getNext();
+}
 return list;
+}
+
+public void saveAllInfo(){
+try{
+File out = new File(fileOutput);
+FileOutputStream fos = new FileOutputStream(out);
+ObjectOutputStream oos = new ObjectOutputStream(fos);
+oos.writeObject(headCar);
+oos.close();
+
+File out2 = new File("Resevations.dat");
+FileOutputStream fos2 = new FileOutputStream(out2);
+ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
+oos2.writeObject(reservations);
+oos2.close;
+}
+
+catch (IOException e) {
+System.out.println(e.toString());
+}
+
+}
+public void readAllData(){ 
+try{
+File f = new File(fileOutput);
+FileInputStream ff = new FileInputStream(f);
+ObjectInputStream in = new ObjectInputStream(ff);
+headCar = (Node) in.readObject();
+in.close;
+
+File f2 = new File("Reservations.dat");
+FileInputStream ff2 = new FileInputStream(f2);
+ObjectInputStream in2 = new ObjectInputStream(ff2);
+numRes = in2.readInt();
+reservations = (Reservations[]) in.readObject();
+in2.colse;
+JOptionPane.showMessagaDialog(null,"All data in files are loaded.");
+}
+
+catch(ClassNotFoundException ex) {
+System.out.println(ex.toString());
+}
+catch (IOException e) {
+System.out.println(e.toString());
+}
+
 }
 
 public String toString(){
