@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import javax.swing.JOptionPane;
 
-public class Reservation {
+public class Reservation implements Serializable{
 
 private String Name;
 private String Mobile;
@@ -29,21 +29,21 @@ public void pickUpCar( Car car, int days ){
 NumDays = days;
 this.car = car;
 car.setAvailable(false);
-TotalPrice = NumDays*this.car.calculatePrice();
+TotalPrice = NumDays * car.calculatePrice();
 }
 
 public void returnCar(){
 if(car.isAvailable() == true)
-System.out.println("This car is already returned");
+JOptionPaneshowMessageDialog(null , "This Car is already returned" ) ;
 else{
 car.setAvailable(true);
-System.out.println("car is returned successfully");
+JOptionPaneshowMessageDialog(null , "car is returned successfully" ) ;
 }
 }
 
 public String toString(){
 return "| Name: " + Name + "\n| Mobile: " + Mobile + "\n| ID: " + ID +
-"\n| car: " + car + "\n| NumDays= " + NumDays + "\n| TotalPrice= " + TotalPrice;
+"\n| Car: " + car + "\n| Number Of Days= " + NumDays + "\n| Total Price= " + TotalPrice;
 }
 
 public String getName(){
