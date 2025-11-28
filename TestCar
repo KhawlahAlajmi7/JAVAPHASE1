@@ -7,11 +7,16 @@ static CarRentalCompany carRentalCompany = new CarRentalCompany("Lexus Company",
 
 public static void main(String args[]) {
 
+File f = new File("Cars.dat");
 
+File f2 = new File("Reservations.dat");
 
+if(f.exists() && f2.exists() ) {
 
+carRentalCompany.readAllData();
 
-		
+}
+else {		
 		
 		//- Small car objects: 
 
@@ -41,7 +46,16 @@ carRentalCompany.addCar(l2);
 carRentalCompany.addCar(sp1);
 carRentalCompany.addCar(sp2);
 carRentalCompany.addCar(sp3);
-		
+
+}
+
+FirstFrame frame = new FirstFrame();
+frame.setVisible(true);
+} //end main
+} //end class	
+
+
+/*
 
 //-------------------------
 	
@@ -235,6 +249,6 @@ System.out.println("--------------------" );
 
 }//sr
 }//class
-
+*/
 
  
