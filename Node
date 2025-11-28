@@ -1,0 +1,31 @@
+import java.io.Serializable;
+
+public class Node implements Serializable {
+
+private Car data;
+private Node next;
+
+public Node(Car obj){
+data = obj;
+next = null;
+}
+
+public void setNext(Node nextP){
+next = nextP;
+}
+
+
+public void setData(Car obj){
+data = obj;
+}
+
+public Node getNext(){
+return next; 
+}
+
+public Car getData(){
+return data; 
+}
+
+
+}
