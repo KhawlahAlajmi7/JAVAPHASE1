@@ -1,1 +1,338 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 
+public class CustomerFrame extends JFrame implements ActionListener {
+
+ButtonGroup buttonGroup = new ButtonGroup();
+JButton addButton , cancelButton , returnButton , searchButton , backButton , exitButton ;
+JComboBox comboBox;
+JLabel jLabelTiltle , jLabel2 , jLabel3 , jLabel4 , jLabel5 , jLabel6 ;
+JPanel panel1 , panel2;
+JRadioButton radio1 , radio2 , radio3 , radio4;
+JTextArea textArea;
+JTextField text1 , text2 , text3 , text4;
+Container contentPane;
+
+public CustomerFrame() {
+contentPane = getContentPane();
+contentPane.setLayout(null);
+setTitle("Customer menu system");
+setLocation(200 , 100);
+setResizable(false);
+setSize(800, 550);
+this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+//jLabelTitle
+jLabelTitle = new JLabel("Customer menu : ");
+jLabelTitle.setFont(new java.awt.Font("Segoe UI", 2, 26)); // 2= italic
+jLabelTitle.setBounds(50 , 20 , 500 , 50 ) ;
+contentPane.add(jLabelTitle );
+//panel reservation
+panel1 = new JPanel();
+panel1.setBorder(BorderFactory.createTitledBorder("Reservation"));
+panel1.setBounds(20 , 80 , 350 , 370 ) ;
+panel1.setLayout(null);
+contentPane.add(panel1 );
+//panel2 view cars
+panel2 = new JPanel();
+panel2.setBorder(BorderFactory.createTitledBorder("View Cars"));
+panel2.setBounds(400 , 80 , 350 , 420 ) ;
+panel2.setLayout(null);
+contentPane.add(panel2 );
+// tools of panel1
+jLabel2 = new JLabel("Car ID : ");
+jLabel2.setBounds(20 , 20 , 150 , 20 ) ;
+panel1.add( jLabel2 );
+
+jLabel3 = new JLabel("User id: : ");
+jLabel3.setBounds(20 , 50 , 150 , 20 ) ;
+panel1.add( jLabel3 );
+
+jLabel4 = new JLabel("Name : ");
+jLabel4.setBounds(20 , 80 , 150 , 20 ) ;
+panel1.add( jLabel4 );
+
+jLabel5 = new JLabel("Mobile Number : ");
+jLabel5.setBounds(20 , 110 , 150 , 20 ) ;
+panel1.add( jLabel5 );
+
+jLabel6 = new JLabel("Days : ");
+jLabel6.setBounds(20 , 140 , 150 , 20 ) ;
+panel1.add( jLabel6 );
+
+text1 = new JTextField();
+text1.setColumns(10);
+text1.setBounds(180 , 20 , 120 , 20 ) ;
+panel1.add( text1 ) ;
+
+text2 = new JTextField();
+text2.setColumns(10);
+text2.setBounds(180 , 50 , 120 , 20 ) ;
+panel1.add( text2 ) ;
+
+text3 = new JTextField();
+text3.setColumns(10);
+text3.setBounds(180 ,
+panel1.add( text3 ) ;
+
+text4 = new JTextField();
+text4.setColumns(10);
+text4.setBounds(180 , 110 , 120 , 20 ) ;
+panel1.add( text4 ) ;
+
+String[] list = {"1" , "2" , "3" , "4"} ;
+comboBox = new JComboBox(list) ;
+comboBox.setBounds(180 , 140 , 100 , 20 ) ;
+panel1.add(comboBox);
+
+addButton = new JButton("Add reservation : ");
+addButton.setBounds(20 , 170 , 150 , 30 ) ;
+panel1.add(addButton );
+addButton.addActionListener(this);
+
+cancelButton = new JButton("Cancel reservation : ");
+cancelButton. setBounds(20 , 210 , 150 , 30 ) ;
+panel1.add(cancelButton );
+cancelButton.addActionListener(this);
+
+checkOutButton = new JButton("Return Car : ");
+checkOutButton.setBounds(20 , 250 , 150 , 30 ) ;
+panel1.add(checkOutButton );
+checkOutButton.addActionListener(this);
+
+searchButton = new JButton("Search reservation : ");
+searchButton.setBounds(20 , 290 , 150 , 30 ) ;
+panel1.add(searchButton );
+searchButton.addActionListener(this);
+
+//backButton , exitButton
+backButton = new JButton("Back");
+backButton.setBounds(20 , 460 , 100 , 30 ) ;
+contentPane.add(backButton );
+backButton.addActionListener(this);
+
+exitButton = new JButton("Exit");
+exitButton.setBounds(130 , 460 , 100 , 30 ) ;
+contentPane.add(exitButton );
+exitButton.addActionListener(this);
+
+// tools of panel2
+textArea = new JTextArea(20,30);
+textArea.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+//textArea.setLineWrap(true);
+//textArea.setWrapStyleWord(true); 
+
+JScrollPane scrollPane = new JScrollPane(textArea); 
+scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+scrollPane.setBounds(25, 25, 300, 300); 
+panel2.add(scrollPane); 
+
+// radio
+radio1 = new JRadioButton("Large Car");
+radio1. setBounds(25 , 330 , 120 , 30 ) ;
+panel2.add(radio1 );
+radio1.addActionListener(this);
+
+radio2 = new JRadioButton("Small Car");
+radio2. setBounds(155 , 330 , 120 , 30 ) ;
+panel2.add(radio2 );
+radio2.addActionListener(this);
+
+radio3 = new JRadioButton("Sport Car");
+radio3. setBounds(25 , 370 , 120 , 30 ) ;
+panel2.add(radio3 );
+radio3.addActionListener(this);
+
+radio4 = new JRadioButton("Available Car");
+radio4. setBounds(155 , 370 , 120 , 30 ) ;
+panel2.add(radio4 );
+radio4.addActionListener(this);
+
+buttonGroup.add(radio1);
+buttonGroup.add(radio2);
+buttonGroup.add(radio3);
+buttonGroup.add(radio4);
+
+}// end constructor
+
+public void actionPerformed(ActionEvent e) {
+if( e.getSource().equals((JButton) addButton)){
+// add reservation
+int CarID;
+try {
+CarID = Integer.parseInt(text1.getText() ) ;
+}
+catch(NumberFormatException ex){
+JOptionPane.showMessageDialog(null , "Car ID must be only digits , try again");
+return ;
+}
+
+Car carObj = TestCar.carRentalCompany.searchCar(CarID);
+if( carObj == null || carObj.isAvailable() == false){
+System.out.println("This Car is not available, try again");
+return ;
+}
+
+String id = text2.getText() ;
+String name = text3.getText() ;
+String mob ;
+try{
+mob = text4.getText() ;
+if( mob.length() != 10 || !mob.startsWith("05"))
+throw new invalidMopileNo("Mobile number must starts with 05 and only 10 digits");
+long num = Long.parseLong(mob) ;
+}
+catch(NumberFormatException ex){
+JOptionPane.showMessageDialog(this , "Mobile must be only digits ,try again");
+return ;
+}
+catch(invalidMopileNo ex){
+JOptionPane.showMessageDialog(this ,ex.getMessage());
+return ;
+}
+
+int days = comboBox.getSelectedIndex() + 1 ; // becaus index start from 0
+
+Reservation res = new Reservation(name , mob , id ) ;
+
+res.pickUpCar(carObj, days);
+TestCar.carRentalCompany.addReservation(res) ;
+JOptionPane.showMessageDialog(this ,"Reservation is added sucssfully , enjoy your car <3");
+JOptionPane.showMessageDialog(this ,res.toString() );
+text1.setText("");
+text2.setText("");
+text3.setText("");
+text4.setText("");
+//////////////////
+if( event.getSource().equals((JButton) cancelButton)){
+//cancel
+int CarID;
+try {
+CarID = Integer.parseInt(text1.getText() ) ;
+}
+catch(NumberFormatException ex){
+JOptionPane.showMessageDialog(null , "Car ID must be only digits , try again");
+return ;
+}
+
+String id = text2.getText() ;
+if(TestCar.carRentalCompany.cancelReservation(id, CarID))
+JOptionPane.showMessageDialog(this ,"Cancel done.");
+else
+JOptionPane.showMessageDialog(this ,"Sorry , can't cancel.");
+
+text1.setText("");
+text2.setText("");
+text3.setText("");
+text4.setText("");
+}
+
+if( event.getSource().equals((JButton) returnButton)){
+//Return car
+int CarID;
+try{
+CarID = Integer.parseInt(text1.getText() ) ;
+} 
+catch(NumberFormatException ex){
+JOptionPane.showMessageDialog(this , "Car ID must be only digits , try again");
+return ;
+}
+
+String id = text2.getText() ;
+Reservation res = TestCar.carRentalCompany.searchReservation(id, CarID) ;
+if(res == null )
+JOptionPane.showMessageDialog(this ,"Can't found this reservation");
+else
+res.returnCar();
+text1.setText("");
+text2.setText("");
+text3.setText("");
+text4.setText("");
+}
+
+if( event.getSource().equals((JButton) searchButton)){
+// searchReservation
+int CarID ;
+try{
+CarID = Integer.parseInt(text1.getText() ) ;
+} 
+catch(NumberFormatException ex){
+JOptionPane.showMessageDialog(this , "Car ID must be only digits , try again");
+return ;
+}
+
+String id = text2.getText() ;
+Reservation res = TestCar.carRentalCompany.searchReservation(id, CarID)
+if(res == null )
+JOptionPane.showMessageDialog(this ,"Can't found this reservation");
+else
+JOptionPane.showMessageDialog(this , res.toString());
+text1.setText("");
+text2.setText("");
+text3.setText("");
+text4.setText("");
+}
+
+if( event.getSource().equals((JButton) backButton)){
+//back
+this.setVisible(false);
+}
+
+if( event.getSource().equals((JButton) exitButton)){
+// exit
+TestCar.carRentalCompany.savaAllInfo();
+JOptionPane.showMessageDialog(this, "Save all data is done. \n good by.");
+System.exit(0);
+}
+
+if( event.getSource().equals((JRadioButton) radio1) && radio1.isSelected()){
+// Large cars
+textArea.setText("");
+LargeCar[] list = TestCar.carRentalCompany.getLargeCar();
+for( int i = 0 ;i < list.length ; i++ )
+if( list[i] != null )
+textArea.append(list[i].toString()+ "\n");
+}
+
+if( event.getSource().equals((JRadioButton) radio2) && radio2.isSelected()){ 
+//small cars
+textArea.setText("");
+SmallCar[] list2 = TestCar.carRentalCompany.getAllSmallCar();
+for( int i = 0 ;i < list2.length ; i++ )
+if( list2[i] != null && ! (list2[i] instanceof SportCar ))
+textArea.append(list2[i].toString()+ "\n");
+}
+
+if( event.getSource().equals((JRadioButton) radio3) && radio3.isSelected()){
+//Sport cars
+textArea.setText("");
+int num ;
+try{
+num = Integer.parseInt(JOptionPane.showInputDialog(this , "Enter Max speed that you want : ") );
+}
+catch(NumberFormatException ex ){
+JOptionPane.showMessageDialog(this, ex.toString() );
+return ;
+}
+SportCar[] list3 = TestCar.carRentalCompany.getAllSmallCar(num);
+for( int i = 0 ;i < list3.length ; i++ )
+if( list3[i] != null )
+textArea.append(list3[i].toString()+ "\n");
+}
+
+if( event.getSource().equals((JRadioButton) radio4) && radio4.isSelected()){
+// available
+textArea.setText("");
+Car[] list4 = TestCar.carRentalCompany.getAllAvailable();
+for( int i = 0 ;i < list4.length ; i++ )
+if( list4[i] != null ){
+textArea.append(list4[i].getClass().getSimpleName());
+textArea.append(list4[i].toString() + "\n");
+}
+}
+
+}// end actionPerformed
+}//end class
