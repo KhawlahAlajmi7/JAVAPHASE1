@@ -1,6 +1,7 @@
 public interface InputOutputInterface {
 
 String fileOutput = "Cars.dat" ;
+
 public void saveAllInfo();
 public void readAllData();
 
