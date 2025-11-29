@@ -34,10 +34,10 @@ TotalPrice = NumDays * car.calculatePrice();
 
 public void returnCar(){
 if(car.isAvailable() == true)
-JOptionPaneshowMessageDialog(null , "This Car is already returned" ) ;
+JOptionPane.showMessageDialog(null , "This Car is already returned" ) ;
 else{
 car.setAvailable(true);
-JOptionPaneshowMessageDialog(null , "car is returned successfully" ) ;
+JOptionPane.showMessageDialog(null , "car is returned successfully" ) ;
 }
 }
 
