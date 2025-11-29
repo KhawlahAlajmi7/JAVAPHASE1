@@ -43,6 +43,7 @@ return false;
 public boolean deleteCar( int carID ){
 if( headCar == null)
 return false;
+
 if(headCar.getData().getCarID() == carID) {
 Car temp = headCar.getData();
 if(temp.isAvailable() == false){
@@ -62,6 +63,10 @@ priv.setNext(current.getNext());
 return true;
 }
 else {
+JOptionPane.showMessageDialog(null,"This Car is already reserved by another person");
+return false; 
+}
+else{
 priv = priv.getNext();
 current = current.getNext();
 }
@@ -118,7 +123,6 @@ return null; //if not found
 public LargeCar[] getLargeCar(){
 LargeCar[] list = new LargeCar[CountCars()];
 int j = 0;
-
 Node current = headCar;
 while(current != null) {
 if( current.getData() instanceof LargeCar )
@@ -131,7 +135,6 @@ return list;
 public SmallCar[] getAllSmallCar(){
 SmallCar[] list = new SmallCar[CountCars()];
 int j = 0;
-
 Node current = headCar;
 while(current != null) {
 if( current.getData() instanceof SmallCar )
@@ -156,7 +159,6 @@ return list;
 public Car[] getAllAvailable(){
 Car[] list = new Car[CountCars()];
 int j = 0;
-
 Node current = headCar;
 while(current != null) {
 if( current.getData().isAvailable() )
@@ -177,6 +179,7 @@ oos.close();
 File out2 = new File("Resevations.dat");
 FileOutputStream fos2 = new FileOutputStream(out2);
 ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
+oos2.writeInt(numRes);
 oos2.writeObject(reservations);
 oos2.close;
 }
@@ -215,8 +218,6 @@ System.out.println(e.toString());
 public String toString(){
 return "Companyname: " + CompanyName + ",numCars: " + numCars + "\n numRes: " + numRes ;
 }
-
-
 
 
 
