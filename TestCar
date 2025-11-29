@@ -52,11 +52,10 @@ carRentalCompany.addCar(sp3);
 FirstFrame frame = new FirstFrame();
 frame.setVisible(true);
 } //end main
-} //end class	
+} //end class		
 
 
 /*
-
 //-------------------------
 	
 int choice;
@@ -246,9 +245,7 @@ System.out.println("can't found this reservation " );
 else
 System.out.println(res.toString() );
 System.out.println("--------------------" );
-
-}//sr
-}//class
 */
+
 
  
