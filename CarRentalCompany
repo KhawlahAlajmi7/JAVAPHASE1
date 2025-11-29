@@ -57,7 +57,7 @@ return true;
 Node priv = headCar;
 Node current = headCar.getNext();
 while( current != null ) {
-if ( current.getData()..getCarID() == carID) {
+if ( current.getData().getCarID() == carID) {
 if (current.getData().isAvailable() == true) {
 priv.setNext(current.getNext());
 return true;
@@ -66,10 +66,10 @@ else {
 JOptionPane.showMessageDialog(null,"This Car is already reserved by another person");
 return false; 
 }
+}
 else{
 priv = priv.getNext();
 current = current.getNext();
-}
 }
 return false;
 
@@ -216,7 +216,7 @@ System.out.println(e.toString());
 }
 
 public String toString(){
-return "Companyname: " + CompanyName + ",numCars: " + numCars + "\n numRes: " + numRes ;
+return "Companyname: " + CompanyName + "\n numRes: " + numRes ;
 }
 
 
