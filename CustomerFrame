@@ -9,7 +9,7 @@ public class CustomerFrame extends JFrame implements ActionListener {
 ButtonGroup buttonGroup = new ButtonGroup();
 JButton addButton , cancelButton , returnButton , searchButton , backButton , exitButton ;
 JComboBox comboBox;
-JLabel jLabelTiltle , jLabel2 , jLabel3 , jLabel4 , jLabel5 , jLabel6 ;
+JLabel jLabelTitle , jLabel2 , jLabel3 , jLabel4 , jLabel5 , jLabel6 ;
 JPanel panel1 , panel2;
 JRadioButton radio1 , radio2 , radio3 , radio4;
 JTextArea textArea;
@@ -74,7 +74,7 @@ panel1.add( text2 ) ;
 
 text3 = new JTextField();
 text3.setColumns(10);
-text3.setBounds(180 ,
+text3.setBounds(180, 80 , 120 , 20 ) ;
 panel1.add( text3 ) ;
 
 text4 = new JTextField();
@@ -97,10 +97,10 @@ cancelButton. setBounds(20 , 210 , 150 , 30 ) ;
 panel1.add(cancelButton );
 cancelButton.addActionListener(this);
 
-checkOutButton = new JButton("Return Car : ");
-checkOutButton.setBounds(20 , 250 , 150 , 30 ) ;
-panel1.add(checkOutButton );
-checkOutButton.addActionListener(this);
+returnButton = new JButton("Return Car : ");
+returnButton.setBounds(20 , 250 , 150 , 30 ) ;
+panel1.add(returnButton );
+returnButton.addActionListener(this);
 
 searchButton = new JButton("Search reservation : ");
 searchButton.setBounds(20 , 290 , 150 , 30 ) ;
@@ -158,8 +158,8 @@ buttonGroup.add(radio4);
 
 }// end constructor
 
-public void actionPerformed(ActionEvent e) {
-if( e.getSource().equals((JButton) addButton)){
+public void actionPerformed(ActionEvent event) {
+if( event.getSource().equals((JButton) addButton)){
 // add reservation
 int CarID;
 try {
@@ -206,6 +206,7 @@ text1.setText("");
 text2.setText("");
 text3.setText("");
 text4.setText("");
+}
 //////////////////
 if( event.getSource().equals((JButton) cancelButton)){
 //cancel
@@ -265,7 +266,7 @@ return ;
 }
 
 String id = text2.getText() ;
-Reservation res = TestCar.carRentalCompany.searchReservation(id, CarID)
+Reservation res = TestCar.carRentalCompany.searchReservation(id, CarID);
 if(res == null )
 JOptionPane.showMessageDialog(this ,"Can't found this reservation");
 else
@@ -283,7 +284,7 @@ this.setVisible(false);
 
 if( event.getSource().equals((JButton) exitButton)){
 // exit
-TestCar.carRentalCompany.savaAllInfo();
+TestCar.carRentalCompany.saveAllInfo();
 JOptionPane.showMessageDialog(this, "Save all data is done. \n good by.");
 System.exit(0);
 }
@@ -334,5 +335,6 @@ textArea.append(list4[i].toString() + "\n");
 }
 }
 
-}// end actionPerformed
-}//end class
+
+} // end actionPerformed
+} //end class
