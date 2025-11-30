@@ -71,17 +71,18 @@ else{
 priv = priv.getNext();
 current = current.getNext();
 }
+}
 return false;
+
 
 }
 
 public boolean addReservation(Reservation res) {
 if ( numRes < reservations.length){
-reservations[numRes] = new Reservations(res);
+reservations[numRes] = new Reservation(res);
 numRes++;
 return true;
 }
-else 
 return false;
 }
 
@@ -181,7 +182,7 @@ FileOutputStream fos2 = new FileOutputStream(out2);
 ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
 oos2.writeInt(numRes);
 oos2.writeObject(reservations);
-oos2.close;
+oos2.close();
 }
 
 catch (IOException e) {
@@ -195,15 +196,15 @@ File f = new File(fileOutput);
 FileInputStream ff = new FileInputStream(f);
 ObjectInputStream in = new ObjectInputStream(ff);
 headCar = (Node) in.readObject();
-in.close;
+in.close();
 
 File f2 = new File("Reservations.dat");
 FileInputStream ff2 = new FileInputStream(f2);
 ObjectInputStream in2 = new ObjectInputStream(ff2);
 numRes = in2.readInt();
-reservations = (Reservations[]) in.readObject();
-in2.colse;
-JOptionPane.showMessagaDialog(null,"All data in files are loaded.");
+reservations = (Reservation[]) in.readObject();
+in2.close();
+JOptionPane.showMessageDialog(null,"All data in files are loaded.");
 }
 
 catch(ClassNotFoundException ex) {
@@ -215,9 +216,7 @@ System.out.println(e.toString());
 
 }
 
-public String toString(){
-return "Companyname: " + CompanyName + "\n numRes: " + numRes ;
-}
+
 
 
 
