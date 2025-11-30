@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -17,11 +16,11 @@ Container contentPane;
 
 
 
-public FirstFrame{
+public FirstFrame(){
 contentPane=getContentPane( );
 contentPane.setLayout(null);
 
-SetTitle ("Car Reservation System");
+setTitle ("Car Reservation System");
 setLocation (200,150);
 setResizable(false);
 setSize(700,400);
@@ -59,8 +58,8 @@ jButtonExit.addActionListener(this);
 
 public void actionPerformed(ActionEvent event) {
 	if(event.getSource().equals(jButtonCustomer)) {
-		CustomerFrame cFrram=new CustomerFrame();
-		cFrame.setVisible(true);
+		CustomerFrame cFram=new CustomerFrame();
+		cFram.setVisible(true);
 	}
 	else
 	if(event.getSource().equals(jButtonAdmin)) {
@@ -68,7 +67,7 @@ public void actionPerformed(ActionEvent event) {
 	String str=JOptionPane.showInputDialog("Enter passWord");
 	
 if(str.equals(pass)) {
-	 AdminFarm aFarm=new AdminFarm();
+	 AdminFram aFarm=new AdminFram();
 	 aFarm.setVisible(true);
 }//smallif
 else 
@@ -76,7 +75,7 @@ else
 	}///if
 	else
 		if(event.getSource().equals( jButtonExit)) {
-			TestCar.Car.savaAllInfo();
+			TestCar.carRentalCompany.saveAllInfo();
 			JOptionPane.showMessageDialog(this," save all data is done good by");
 System.exit(0);
 
