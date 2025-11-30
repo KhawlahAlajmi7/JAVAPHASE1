@@ -1,1 +1,85 @@
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+
+
+public class FirstFrame  extends JFrame  implements ActionListener{
+ JButton  jButtonCustomer;
+ JButton  jButtonAdmin;
+ JButton  jButtonExit;
+ JLabel  jLabletitle;
+ JLabel  jLableImage;
+
+Container contentPane;
+
+
+
+public FirstFrame{
+contentPane=getContentPane( );
+contentPane.setLayout(null);
+
+SetTitle ("Car Reservation System");
+setLocation (200,150);
+setResizable(false);
+setSize(700,400);
+this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+
+jLableImage=new JLabel(new ImageIcon("Car Reservation image.JPEG")); //image 
+jLableImage.setBounds(300,100,300,168);
+contentPane.add(jLableImage);
+
+
+jLabletitle=new JLabel(" welcom in our car system");
+jLabletitle.setFont(new java.awt.Font("Segoe UI",1,37));
+jLabletitle.setBounds(50,20,500,50);
+contentPane.add(jLabletitle);
+
+jButtonCustomer=new JButton("Customer");
+jButtonCustomer.setBounds(30,100,120,30);
+contentPane.add(jButtonCustomer);
+jButtonCustomer.addActionListener(this);
+
+
+jButtonAdmin=new JButton("Admin");
+jButtonAdmin.setBounds(30,150,120,30);
+contentPane.add(jButtonAdmin);
+jButtonAdmin.addActionListener(this);
+
+jButtonExit=new JButton("Exit");
+jButtonExit.setBounds(30,200,120,30);
+contentPane.add(jButtonExit);
+jButtonExit.addActionListener(this);
+
+
+}
+
+public void actionPerformed(ActionEvent event) {
+	if(event.getSource().equals(jButtonCustomer)) {
+		CustomerFrame cFrram=new CustomerFrame();
+		cFrame.setVisible(true);
+	}
+	else
+	if(event.getSource().equals(jButtonAdmin)) {
+	String pass="123"	;
+	String str=JOptionPane.showInputDialog("Enter passWord");
+	
+if(str.equals(pass)) {
+	 AdminFarm aFarm=new AdminFarm();
+	 aFarm.setVisible(true);
+}//smallif
+else 
+	JOptionPane.showMessageDialog(this," invalid password");
+	}///if
+	else
+		if(event.getSource().equals( jButtonExit)) {
+			TestCar.Car.savaAllInfo();
+			JOptionPane.showMessageDialog(this," save all data is done good by");
+System.exit(0);
+
+}
+}
+}
